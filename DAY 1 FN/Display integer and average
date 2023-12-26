@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class CombinedProgram {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Integer input
+        System.out.print("Enter an integer: ");
+        int userInput = scanner.nextInt();
+        System.out.println("Entered integer: " + userInput);
+
+        // Floating-point input and average calculation
+        System.out.print("Enter the first floating-point number: ");
+        double num1 = scanner.nextDouble();
+
+        System.out.print("Enter the second floating-point number: ");
+        double num2 = scanner.nextDouble();
+
+        double average = (num1 + num2) / 2;
+
+        // Display average with two decimal places
+        System.out.printf("Average: %.2f\n", average);
+
+        scanner.close();
+    }
+}
