@@ -1,0 +1,36 @@
+import java.util.HashSet;
+import java.util.Set;
+
+public class HappyNumberChecker {
+    public static void main(String[] args) {
+        int n = 19; // You can change this value to test different numbers
+        boolean isHappy = isHappyNumber(n);
+
+        System.out.println(isHappy);
+    }
+
+    // Function to check if a number is a happy number
+    private static boolean isHappyNumber(int n) {
+        Set<Integer> seenNumbers = new HashSet<>();
+
+        while (n != 1 && !seenNumbers.contains(n)) {
+            seenNumbers.add(n);
+            n = getSumOfSquares(n);
+        }
+
+        return n == 1;
+    }
+
+    // Function to calculate the sum of squares of digits
+    private static int getSumOfSquares(int num) {
+        int sum = 0;
+
+        while (num > 0) {
+            int digit = num % 10;
+            sum += digit * digit;
+            num /= 10;
+        }
+
+        return sum;
+    }
+}
