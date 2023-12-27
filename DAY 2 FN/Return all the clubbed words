@@ -1,0 +1,59 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class ClubbedWords {
+    public static List<String> findClubbedWords(String[] words) {
+        List<String> result = new ArrayList<>();
+        Map<String, Boolean> memo = new HashMap<>();
+
+        for (String word : words) {
+            if (isClubbed(word, 0, words, memo)) {
+                result.add(word);
+            }
+        }
+
+        return result;
+    }
+
+    private static boolean isClubbed(String word, int start, String[] words, Map<String, Boolean> memo) {
+        if (start == word.length()) {
+            return true;
+        }
+
+        if (memo.containsKey(word.substring(start))) {
+            return memo.get(word.substring(start));
+        }
+
+        for (int end = start + 1; end <= word.length(); end++) {
+            String prefix = word.substring(start, end);
+            if (containsWord(prefix, words) && isClubbed(word, end, words, memo)) {
+                memo.put(word.substring(start), true);
+                return true;
+            }
+        }
+
+        memo.put(word.substring(start), false);
+        return false;
+    }
+
+    private static boolean containsWord(String target, String[] words) {
+        for (String word : words) {
+            if (word.equals(target)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        String[] inputWords = {"mat", "mate", "matbellmates", "bell", "bellmatesbell", "butterribbon", "butter", "ribbon"};
+        List<String> outputClubbedWords = findClubbedWords(inputWords);
+
+        // Print the output
+        for (String clubbedWord : outputClubbedWords) {
+            System.out.println(clubbedWord);
+        }
+    }
+}
