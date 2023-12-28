@@ -1,0 +1,27 @@
+import java.util.Arrays;
+
+public class RearrangeArray {
+
+    public static void rearrangeArray(int[] nums) {
+        int negativeIndex = 0;
+
+        // Iterate through the array and move negative numbers to the front
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] < 0) {
+                // Swap negative number with the first non-negative number (at negativeIndex)
+                int temp = nums[i];
+                nums[i] = nums[negativeIndex];
+                nums[negativeIndex] = temp;
+
+                // Move the negativeIndex to the next position
+                negativeIndex++;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] inputArray = {-12, 11, -13, -5, 6, -7, 5, -3, -6};
+        rearrangeArray(inputArray);
+
+        System.out.println("Rearranged Array: " + Arrays.toString(inputArray));
+    }
