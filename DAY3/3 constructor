@@ -1,0 +1,30 @@
+public class ExampleClass {
+    
+    // No arguments constructor
+    public ExampleClass() {
+        // Constructor code with no arguments
+    }
+
+    // Default constructor (if no other constructor is defined)
+    // This is optional, as the compiler provides it if there are no constructors defined.
+    
+    // Parameterized constructor with one type of parameter
+    public ExampleClass(int parameter1) {
+        // Constructor code with one parameter
+    }
+
+    // Parameterized constructor with two types of parameters
+    public ExampleClass(String parameter1, double parameter2) {
+        // Constructor code with two parameters of different types
+    }
+
+    // You can create more parameterized constructors as needed
+
+    // Methods and other members of the class can be added here
+    
+    public static void main(String[] args) {
+        // You can create instances of ExampleClass and use different constructors
+        ExampleClass instance1 = new ExampleClass();
+        ExampleClass instance2 = new ExampleClass(42);
+        ExampleClass instance3 = new ExampleClass("Hello", 3.14);
+    }
