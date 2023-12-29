@@ -1,0 +1,75 @@
+class Employee {
+    private String name;
+    private int employeeID;
+    private static final int BASIC_SALARY = 50000;
+
+    public Employee(String name, int employeeID) {
+        this.name = name;
+        this.employeeID = employeeID;
+    }
+
+    public int calculateSalary() {
+        return BASIC_SALARY;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getEmployeeID() {
+        return employeeID;
+    }
+}
+
+class Manager extends Employee {
+    private double bonusPercentage;
+
+    public Manager(String name, int employeeID, double bonusPercentage) {
+        super(name, employeeID);
+        this.bonusPercentage = bonusPercentage;
+    }
+
+    @Override
+    public int calculateSalary() {
+        return (int) (super.calculateSalary() + BASIC_SALARY * bonusPercentage / 100);
+    }
+}
+
+class Developer extends Employee {
+    private String programmingLanguage;
+
+    public Developer(String name, int employeeID, String programmingLanguage) {
+        super(name, employeeID);
+        this.programmingLanguage = programmingLanguage;
+    }
+
+    @Override
+    public int calculateSalary() {
+        // Assuming an extra allowance of $10,000 for developers
+        return super.calculateSalary() + 10000;
+    }
+
+    public String getProgrammingLanguage() {
+        return programmingLanguage;
+    }
+}
+
+public class EmployeeTest {
+    public static void main(String[] args) {
+        Manager manager = new Manager("John Manager", 101, 15.0);
+        Developer developer = new Developer("Alice Developer", 102, "Java");
+
+        // Print details and calculated salary for Manager
+        System.out.println("Manager Details:");
+        System.out.println("Name: " + manager.getName());
+        System.out.println("Employee ID: " + manager.getEmployeeID());
+        System.out.println("Bonus Percentage: " + manager.calculateSalary());
+        System.out.println();
+
+        // Print details and calculated salary for Developer
+        System.out.println("Developer Details:");
+        System.out.println("Name: " + developer.getName());
+        System.out.println("Employee ID: " + developer.getEmployeeID());
+        System.out.println("Programming Language: " + developer.getProgrammingLanguage());
+        System.out.println("Total Salary: " + developer.calculateSalary());
+    }
