@@ -1,0 +1,19 @@
+class MyRunnable implements Runnable {
+    @Override
+    public void run() {
+        // Task to be performed by the threads
+        System.out.println("Thread name: " + Thread.currentThread().getName());
+    }
+}
+
+public class ThreadExample {
+    public static void main(String[] args) {
+        // Creating two threads with the same Runnable instance
+        Thread t1 = new Thread(new MyRunnable());
+        Thread t2 = new Thread(new MyRunnable());
+
+        // Starting the threads
+        t1.start();
+        t2.start();
+    }
+}
