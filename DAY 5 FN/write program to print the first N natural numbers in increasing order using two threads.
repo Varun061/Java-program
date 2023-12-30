@@ -1,0 +1,45 @@
+class NumberPrinter implements Runnable {
+    private final int start;
+    private final int end;
+
+    public NumberPrinter(int start, int end) {
+        this.start = start;
+        this.end = end;
+    }
+
+    @Override
+    public void run() {
+        for (int i = start; i <= end; i++) {
+            System.out.print(i + " ");
+        }
+    }
+}
+
+public class PrintNumbersUsingThreads {
+    public static void main(String[] args) {
+        int N = 18;
+
+        // Calculate midpoint to divide the task between two threads
+        int mid = N / 2;
+
+        // Create two instances of the NumberPrinter with different ranges
+        NumberPrinter printer1 = new NumberPrinter(1, mid);
+        NumberPrinter printer2 = new NumberPrinter(mid + 1, N);
+
+        // Create two threads
+        Thread t1 = new Thread(printer1);
+        Thread t2 = new Thread(printer2);
+
+        // Start both threads
+        t1.start();
+        t2.start();
+
+        try {
+            // Wait for both threads to finish
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
