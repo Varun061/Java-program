@@ -1,0 +1,45 @@
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+public class FileExtensionFilter {
+
+    public static void main(String[] args) {
+        // Specify the folder path and extension
+        String folderPath = "/path/to/your/folder";
+        String extension = "txt"; // Change this to the desired extension
+
+        // Get the list of files with the specified extension
+        List<File> filteredFiles = getFilesWithExtension(folderPath, extension);
+
+        // Display the list of files
+        System.out.println("Files with extension ." + extension + " in folder " + folderPath + ":");
+        for (File file : filteredFiles) {
+            System.out.println(file.getName());
+        }
+    }
+
+    private static List<File> getFilesWithExtension(String folderPath, String extension) {
+        List<File> filteredFiles = new ArrayList<>();
+
+        File folder = new File(folderPath);
+
+        // Validate that the folder exists and is a directory
+        if (folder.exists() && folder.isDirectory()) {
+            File[] files = folder.listFiles();
+
+            // Iterate through the files and add those with the specified extension to the list
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isFile() && file.getName().toLowerCase().endsWith("." + extension.toLowerCase())) {
+                        filteredFiles.add(file);
+                    }
+                }
+            }
+        } else {
+            System.out.println("Invalid folder path or not a directory.");
+        }
+
+        return filteredFiles;
+    }
+}
