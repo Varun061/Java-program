@@ -1,0 +1,48 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+// Custom exception class for positive numbers
+class PositiveNumberException extends Exception {
+    public PositiveNumberException(String message) {
+        super(message);
+    }
+}
+
+public class CheckPositiveNumbers {
+
+    public static void main(String[] args) {
+        // Specify the file path
+        String filePath = "/path/to/your/numbers.txt"; // Change this to your file path
+
+        try {
+            checkNumbersFromFile(filePath);
+            System.out.println("All numbers are non-positive.");
+        } catch (PositiveNumberException e) {
+            System.out.println("Exception: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Error reading the file: " + e.getMessage());
+        }
+    }
+
+    private static void checkNumbersFromFile(String filePath) throws IOException, PositiveNumberException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            int lineNumber = 0;
+
+            while ((line = reader.readLine()) != null) {
+                lineNumber++;
+
+                try {
+                    int number = Integer.parseInt(line);
+
+                    if (number > 0) {
+                        throw new PositiveNumberException("Positive number found at line " + lineNumber + ": " + number);
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid number format at line " + lineNumber + ": " + line);
+                }
+            }
+        }
+    }
+}
